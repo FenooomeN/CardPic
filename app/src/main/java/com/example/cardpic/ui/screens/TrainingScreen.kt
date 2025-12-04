@@ -91,6 +91,7 @@ fun TrainingScreen(repo: RoomRepository, onDone: () -> Unit) {
                     card = c,
                     isFlipped = isFlipped,
                     onFlip = { isFlipped = !isFlipped },
+                    onDelete = {},
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)

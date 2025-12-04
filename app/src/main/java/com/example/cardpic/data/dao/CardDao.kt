@@ -19,8 +19,8 @@ interface CardDao {
     @Query("DELETE FROM cards WHERE topicId = :topicId")
     suspend fun deleteCardsForTopic(topicId: Int)
 
-    @Delete
-    suspend fun delete(card: CardEntity)
+    @Query("DELETE FROM cards WHERE Id = :Id")
+    suspend fun deleteCardById(Id: Int)
 
     @Query("SELECT COUNT(*) FROM cards WHERE topicId = :topicId")
     fun getCardsCount(topicId: Int): Flow<Int>
