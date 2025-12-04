@@ -53,6 +53,10 @@ class RoomRepository(
         cardDao.insert(card)
     }
 
+    suspend fun deleteCard(Id: Int) {
+        cardDao.deleteCardById(Id)
+    }
+
     // ----------------------------------------------------------
     // IMAGE STORAGE
     // ----------------------------------------------------------

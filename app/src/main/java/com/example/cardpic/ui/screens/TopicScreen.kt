@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cardpic.data.RoomRepository
 import com.example.cardpic.ui.components.FlipCard
 import com.example.cardpic.ui.dialogs.AddCardDialog
+import kotlinx.coroutines.launch
 
 /**
  * Экран выбранной темы. Показывает карточки темы и позволяет добавлять новые карточки.
@@ -26,6 +27,7 @@ fun TopicScreen(
     onBack: () -> Unit
 ) {
     var showAddCard by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     // Подписка на карточки через Flow
     val cards by repo.cardDao
@@ -74,6 +76,11 @@ fun TopicScreen(
                             isFlipped = isFlipped,
                             onFlip = {
                                 flippedStates[card.id] = !isFlipped
+                            },
+                            onDelete = {
+                                scope.launch {
+                                    repo.deleteCard(card.id)
+                                }
                             },
                             modifier = Modifier.fillMaxWidth()
                         )
